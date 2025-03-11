@@ -1,0 +1,4 @@
+Prérequis pour le putain de bordel de merde (site web) de SAE BD:
+- Une barre de recherche : elle recheche dans la base de donnée par rapport au nom de l'université.
+- Une recherche par promité, une barre de recheche où on met la ville et/ou le département, et on a un pointeur de proximité (5km autour)
+- Fait des filtes.
