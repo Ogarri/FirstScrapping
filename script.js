@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const dateInput = document.getElementById('date-input');
             const startDateInput = document.getElementById('start-date-input');
             const endDateInput = document.getElementById('end-date-input');
+            const searchButton = document.getElementById('search-button');
             let filteredData = data;
 
             const renderTable = (data) => {
@@ -34,11 +35,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 container.appendChild(table);
             };
 
-            searchBar.addEventListener('input', (e) => {
-                const searchTerm = e.target.value.toLowerCase();
-                filteredData = data.filter(item => item.city.toLowerCase().includes(searchTerm));
+            const filterData = () => {
+                const searchTerm = searchBar.value.toLowerCase();
+                const date = dateInput.value;
+                const startDate = startDateInput.value;
+                const endDate = endDateInput.value;
+
+                filteredData = data.filter(item => {
+                    const matchesCity = item.city.toLowerCase().includes(searchTerm);
+                    const itemDate = new Date(item.date);
+                    const matchesDate = dateFilterType.value === 'exact' ? itemDate.toISOString().split('T')[0] === date :
+                                        dateFilterType.value === 'interval' ? itemDate >= new Date(startDate) && itemDate <= new Date(endDate) : true;
+                    return matchesCity && matchesDate;
+                });
+
                 renderTable(filteredData);
-            });
+            };
+
+            searchButton.addEventListener('click', filterData);
 
             dateFilterType.addEventListener('change', () => {
                 if (dateFilterType.value === 'exact') {
@@ -53,30 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     dateInput.style.display = 'none';
                     startDateInput.style.display = 'none';
                     endDateInput.style.display = 'none';
-                }
-            });
-
-            dateInput.addEventListener('input', (e) => {
-                const date = e.target.value;
-                filteredData = data.filter(item => item.date === date);
-                renderTable(filteredData);
-            });
-
-            startDateInput.addEventListener('input', () => {
-                const startDate = startDateInput.value;
-                const endDate = endDateInput.value;
-                if (startDate && endDate) {
-                    filteredData = data.filter(item => item.date >= startDate && item.date <= endDate);
-                    renderTable(filteredData);
-                }
-            });
-
-            endDateInput.addEventListener('input', () => {
-                const startDate = startDateInput.value;
-                const endDate = endDateInput.value;
-                if (startDate && endDate) {
-                    filteredData = data.filter(item => item.date >= startDate && item.date <= endDate);
-                    renderTable(filteredData);
                 }
             });
 
