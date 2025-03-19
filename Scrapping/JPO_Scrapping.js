@@ -85,10 +85,6 @@ async function scrapeJPOPage(pageNumber, pageMax) {
 
     console.log(`✅ Page ${pageNumber} récupérée ! ${data.length} résultats trouvés.`);
 
-    // sauvegarde des données pour 1 pages (ne pas de-commenter si on sauvegarde avec scrapeAllPages)
-    // fs.writeFileSync("data.json", JSON.stringify(data, null, 2), "utf-8");
-    // console.log("📂 Données sauvegardées dans data.json !");
-
     await browser.close();
     return data;
   } catch (error) {
@@ -122,8 +118,4 @@ async function scrapeAllPages() {
   }
 }
 
-// Lancer le scraping de toutes les pages
-
-// getTotalPages(); // Fonctionne !
-// scrapeJPOPage(1, 1); // Fonctionne !
 scrapeAllPages();
