@@ -5,9 +5,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>SAE : Projet BD (Mise en oeuvre et Exploitation d'une base de données)</title>
         <link rel="stylesheet" href="style.css">
-        <source src="script.js">
     </head>
     <body>
         <h1>SAE : Projet BD (Mise en oeuvre et Exploitation d'une base de données)</h1>
+        <input type="text" id="search-bar" placeholder="Rechercher par ville...">
+        <select id="date-filter-type">
+            <option value="none" selected>Ne pas rechercher par date</option>
+            <option value="exact">Recherche par date exacte</option>
+            <option value="interval">Recherche par intervalle de dates</option>
+        </select>
+        <input type="date" id="date-input" style="display: none;">
+        <input type="date" id="start-date-input" style="display: none;">
+        <input type="date" id="end-date-input" style="display: none;">
+        <button id="search-button">Rechercher</button>
+        <div id="data-container"></div>
+        <script src="script.js"></script>
     </body>
 </html>
