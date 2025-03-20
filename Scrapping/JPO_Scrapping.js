@@ -69,7 +69,14 @@ async function scrapeJPOPage(pageNumber, pageMax) {
             const linkElement = columns[0].querySelector("a"); 
             const href = linkElement ? linkElement.href : null;
             
-            const date = columns[1].innerText.trim();
+            const dateText = columns[1].innerText.trim();
+            let date = [];
+            const regex = /(\d{1,2} \w+ \d{4})/g;
+            const match = dateText.match(regex);
+            if (match) {
+              date = match;
+            }
+
             const city = columns[2].innerText.trim();
 
             results.push({ href, date, city });
@@ -111,7 +118,7 @@ async function scrapeAllPages() {
 
   // Sauvegarde dans un fichier JSON
   try {
-    fs.writeFileSync("data.json", JSON.stringify(allResults, null, 2), "utf-8");
+    fs.writeFileSync("data/data_JPO.json", JSON.stringify(allResults, null, 2), "utf-8");
     console.log("📂 Données sauvegardées dans data.json !");
   } catch (writeError) {
     console.error("❌ Erreur lors de l'écriture du fichier JSON:", writeError.message);
