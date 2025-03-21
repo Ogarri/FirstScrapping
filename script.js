@@ -10,11 +10,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const endDateFilter = document.getElementById('end-date-filter');
             const postalCodeFilter = document.getElementById('postal-code-filter');
             const paginationContainer = document.getElementById('pagination-container');
-            const sortSelect = document.getElementById('sort-select'); // Menu déroulant pour le tri
+            const sortSelect = document.getElementById('sort-select');
+            const formationFilter = document.getElementById('formation-filter');
             let filteredData = data;
             let currentPage = 1;
             const itemsPerPage = 30;
             let currentSort = { column: null, order: 'asc' };
+
+            const capitalizeFirstLetter = (string) => {
+                return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+            };
 
             const renderTable = (data, page = 1) => {
                 container.innerHTML = '';
@@ -33,12 +38,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     <tbody>
                         ${data.slice((page - 1) * itemsPerPage, page * itemsPerPage).map(item => `
                             <tr onclick="window.open('details.html?nom=${encodeURIComponent(item.nom)}', '_blank')">
-                                <td>${item.nom}</td>
-                                <td>${item.ville}</td>
+                                <td>${capitalizeFirstLetter(item.nom)}</td>
+                                <td>${capitalizeFirstLetter(item.ville)}</td>
                                 <td>${item.codePostal}</td>
                                 <td>
                                     <ul>
-                                        ${item.formations.map(formation => `<li>${formation.formationNom}</li>`).join('')}
+                                        ${item.formations.map(formation => `<li>${capitalizeFirstLetter(formation.formationNom)}</li>`).join('')}
                                     </ul>
                                 </td>
                                 <td>
@@ -63,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     pageButton.disabled = page === currentPage;
                     pageButton.addEventListener('click', () => {
                         renderTable(filteredData, page);
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
                     });
                     return pageButton;
                 };
@@ -100,16 +106,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 const startDateTerm = startDateFilter.value;
                 const endDateTerm = endDateFilter.value;
                 const postalCodeTerm = postalCodeFilter.value;
+                const formationTerm = formationFilter.value.toLowerCase();
 
                 filteredData = data.filter(item => {
                     const matchesName = item.nom.toLowerCase().includes(searchTerm);
                     const matchesPostalCode = item.codePostal.includes(postalCodeTerm);
+                    const matchesFormation = item.formations.some(formation => formation.formationNom.toLowerCase().includes(formationTerm));
                     const matchesDate = item.dateJPO.some(date => {
                         const normalizedDate = normalizeDate(date.replace(/-/g, '/'));
                         const dateMatches = (!startDateTerm || normalizedDate >= startDateTerm) && (!endDateTerm || normalizedDate <= endDateTerm);
                         return dateMatches;
                     });
-                    return matchesName && matchesPostalCode && matchesDate;
+                    return matchesName && matchesPostalCode && matchesFormation && matchesDate;
                 });
 
                 sortTable();
@@ -121,6 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 startDateFilter.value = '';
                 endDateFilter.value = '';
                 postalCodeFilter.value = '';
+                formationFilter.value = '';
                 filteredData = data;
                 sortTable();
                 renderTable(filteredData, 1);

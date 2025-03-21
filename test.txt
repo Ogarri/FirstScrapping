@@ -3,7 +3,11 @@ Prérequis pour le putain de bordel de merde (site web) de SAE BD:
 - Une recherche par promité, une barre de recheche où on met la ville et/ou le département, et on a un pointeur de proximité (5km autour)
 
 ajouter des filtes : 
-- par ville nom (fait)
-- par date (a patch)
-- par proximité (a faire)
-- par type d'école (a faire)
+- par Nom d'école
+- par date
+- par code postal
+- par formation
+
+idées visibilité :
+- tous les noms dans le tableau doivent commencer par une majucule
+- cliquer sur la pagination nous fait scroll en haut de la page
