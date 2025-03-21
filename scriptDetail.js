@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p><strong>Ville:</strong> ${item.ville}</p>
                     <p><strong>Code Postal:</strong> ${item.codePostal}</p>
                     <p><strong>Formations:</strong></p>
-                    <table>
+                    <table id="tableauDetail">
                         <thead>
                             <tr>
                                 <th>Nom</th>
