@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <ul>
                         ${item.dateJPO.map(date => `<li>${date.replace(/-/g, '/')}</li>`).join('')}
                     </ul>
+                    </br>
                     <p><strong>Téléphone:</strong> ${item.telephone}</p>
                     <p><strong>Email:</strong> ${item.email}</p>
                     <p><strong>Site Web:</strong> <a href="${item.siteWeb}" target="_blank">${item.siteWeb}</a></p>
