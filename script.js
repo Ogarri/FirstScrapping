@@ -4,16 +4,14 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             const container = document.getElementById('data-container');
             const searchBar = document.getElementById('search-bar');
-            const dateFilterType = document.getElementById('date-filter-type');
-            const dateInput = document.getElementById('date-input');
-            const startDateInput = document.getElementById('start-date-input');
-            const endDateInput = document.getElementById('end-date-input');
             const searchButton = document.getElementById('search-button');
+            const resetButton = document.getElementById('reset-button');
             let filteredData = data;
 
             const renderTable = (data) => {
                 container.innerHTML = '';
                 const table = document.createElement('table');
+                table.id = 'tableauGeneral';
                 table.innerHTML = `
                     <thead>
                         <tr>
@@ -49,38 +47,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const filterData = () => {
                 const searchTerm = searchBar.value.toLowerCase();
-                const date = dateInput.value;
-                const startDate = startDateInput.value;
-                const endDate = endDateInput.value;
 
                 filteredData = data.filter(item => {
                     const matchesName = item.nom.toLowerCase().includes(searchTerm);
-                    const itemDate = new Date(item.date);
-                    const matchesDate = dateFilterType.value === 'exact' ? itemDate.toISOString().split('T')[0] === date :
-                                        dateFilterType.value === 'interval' ? itemDate >= new Date(startDate) && itemDate <= new Date(endDate) : true;
-                    return matchesName && matchesDate;
+                    return matchesName;
                 });
 
                 renderTable(filteredData);
             };
 
-            searchButton.addEventListener('click', filterData);
+            const resetFilters = () => {
+                searchBar.value = '';
+                filteredData = data;
+                renderTable(filteredData);
+            };
 
-            dateFilterType.addEventListener('change', () => {
-                if (dateFilterType.value === 'exact') {
-                    dateInput.style.display = 'block';
-                    startDateInput.style.display = 'none';
-                    endDateInput.style.display = 'none';
-                } else if (dateFilterType.value === 'interval') {
-                    dateInput.style.display = 'none';
-                    startDateInput.style.display = 'block';
-                    endDateInput.style.display = 'block';
-                } else {
-                    dateInput.style.display = 'none';
-                    startDateInput.style.display = 'none';
-                    endDateInput.style.display = 'none';
-                }
-            });
+            searchButton.addEventListener('click', filterData);
+            resetButton.addEventListener('click', resetFilters);
 
             renderTable(filteredData);
         })
