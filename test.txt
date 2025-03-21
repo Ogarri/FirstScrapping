@@ -11,3 +11,5 @@ ajouter des filtes :
 idées visibilité :
 - tous les noms dans le tableau doivent commencer par une majucule
 - cliquer sur la pagination nous fait scroll en haut de la page
+- voir pour faire un footer avec les autres
+- préparer un readme
