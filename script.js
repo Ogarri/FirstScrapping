@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('Scrapping/old_data.json')
+    fetch('Data/data_JPO.json')
         .then(response => response.json())
         .then(data => {
             const container = document.getElementById('data-container');
@@ -17,17 +17,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 table.innerHTML = `
                     <thead>
                         <tr>
-                            <th>Lien</th>
-                            <th>Date</th>
+                            <th>Nom</th>
                             <th>Ville</th>
+                            <th>Code Postal</th>
+                            <th>Formations</th> <!-- Nouvelle colonne pour les formations -->
+                            <th>Dates JPO</th> <!-- Nouvelle colonne pour les dates JPO -->
                         </tr>
                     </thead>
                     <tbody>
                         ${data.map(item => `
-                            <tr>
-                                <td><a href="${item.href}">${item.href}</a></td>
-                                <td>${item.date}</td>
-                                <td>${item.city}</td>
+                            <tr onclick="window.location.href='details.html?nom=${encodeURIComponent(item.nom)}'">
+                                <td>${item.nom}</td>
+                                <td>${item.ville}</td>
+                                <td>${item.codePostal}</td>
+                                <td>
+                                    <ul>
+                                        ${item.formations.map(formation => `<li>${formation.formationNom}</li>`).join('')}
+                                    </ul>
+                                </td> <!-- Affichage des noms des formations -->
+                                <td>
+                                    <ul>
+                                        ${item.dateJPO.map(date => `<li>${date.replace(/-/g, '/')}</li>`).join('')} <!-- Remplacement des "-" par des "/" -->
+                                    </ul>
+                                </td> <!-- Affichage des dates JPO -->
                             </tr>
                         `).join('')}
                     </tbody>
@@ -42,11 +54,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const endDate = endDateInput.value;
 
                 filteredData = data.filter(item => {
-                    const matchesCity = item.city.toLowerCase().includes(searchTerm);
+                    const matchesName = item.nom.toLowerCase().includes(searchTerm);
                     const itemDate = new Date(item.date);
                     const matchesDate = dateFilterType.value === 'exact' ? itemDate.toISOString().split('T')[0] === date :
                                         dateFilterType.value === 'interval' ? itemDate >= new Date(startDate) && itemDate <= new Date(endDate) : true;
-                    return matchesCity && matchesDate;
+                    return matchesName && matchesDate;
                 });
 
                 renderTable(filteredData);
