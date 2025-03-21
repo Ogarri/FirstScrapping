@@ -9,9 +9,21 @@
     <body>
         <h1>SAE : Projet BD (Mise en oeuvre et Exploitation d'une base de données)</h1>
         <input type="text" id="search-bar" placeholder="Rechercher par nom...">
+        <input type="date" id="start-date-filter" placeholder="Date de début">
+        <input type="date" id="end-date-filter" placeholder="Date de fin">
+        <input type="text" id="postal-code-filter" placeholder="Rechercher par code postal...">
         <button id="search-button">Rechercher</button>
         <button id="reset-button">Réinitialiser</button>
+        <select id="sort-select">
+            <option value="nom-asc">Nom (A-Z)</option>
+            <option value="nom-desc">Nom (Z-A)</option>
+            <option value="codePostal-asc">Code Postal (Croissant)</option>
+            <option value="codePostal-desc">Code Postal (Décroissant)</option>
+            <option value="dateJPO-asc">Date (Croissant)</option>
+            <option value="dateJPO-desc">Date (Décroissant)</option>
+        </select>
         <div id="data-container"></div>
+        <div id="pagination-container"></div>
         <script src="script.js"></script>
     </body>
 </html>
