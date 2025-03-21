@@ -57,15 +57,37 @@ document.addEventListener('DOMContentLoaded', () => {
             const renderPagination = (totalItems, currentPage) => {
                 paginationContainer.innerHTML = '';
                 const totalPages = Math.ceil(totalItems / itemsPerPage);
-                for (let i = 1; i <= totalPages; i++) {
+                const createPageButton = (page) => {
                     const pageButton = document.createElement('button');
-                    pageButton.textContent = i;
-                    pageButton.disabled = i === currentPage;
+                    pageButton.textContent = page;
+                    pageButton.disabled = page === currentPage;
                     pageButton.addEventListener('click', () => {
-                        renderTable(filteredData, i);
+                        renderTable(filteredData, page);
                     });
-                    paginationContainer.appendChild(pageButton);
+                    return pageButton;
+                };
+
+                if (totalPages <= 1) return;
+
+                paginationContainer.appendChild(createPageButton(1));
+
+                if (currentPage > 6) {
+                    const dots = document.createElement('span');
+                    dots.textContent = '...';
+                    paginationContainer.appendChild(dots);
                 }
+
+                for (let i = Math.max(2, currentPage - 5); i <= Math.min(totalPages - 1, currentPage + 5); i++) {
+                    paginationContainer.appendChild(createPageButton(i));
+                }
+
+                if (currentPage < totalPages - 5) {
+                    const dots = document.createElement('span');
+                    dots.textContent = '...';
+                    paginationContainer.appendChild(dots);
+                }
+
+                paginationContainer.appendChild(createPageButton(totalPages));
             };
 
             const normalizeDate = (date) => {
