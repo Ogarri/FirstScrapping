@@ -118,8 +118,8 @@ async function scrapeAllPages() {
 
   // Sauvegarde dans un fichier JSON
   try {
-    fs.writeFileSync("data/data_JPO.json", JSON.stringify(allResults, null, 2), "utf-8");
-    console.log("📂 Données sauvegardées dans data.json !");
+    fs.writeFileSync("data/dataRechercheJPO.json", JSON.stringify(allResults, null, 2), "utf-8");
+    console.log("📂 Données sauvegardées dans dataRechercheJPO.json !");
   } catch (writeError) {
     console.error("❌ Erreur lors de l'écriture du fichier JSON:", writeError.message);
   }

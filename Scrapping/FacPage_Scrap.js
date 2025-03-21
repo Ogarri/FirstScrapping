@@ -1,6 +1,6 @@
 const fs = require("fs");
 const puppeteer = require("puppeteer");
-const data = "Data/data_JPO.json"
+const data = "Data/dataRechercheJPO.json"
 
 function getTotalHrefs() {
   const rawData = fs.readFileSync(data, "utf-8");
@@ -116,15 +116,15 @@ async function scrapeFacPage(url, date, ville ,index, totalIndex) {
 
 async function scrapeAllFacs() {  
   let allData = [];
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < jpoData.length; i++) {
     const [url, date, ville] = jpoData[i];
     const data = await scrapeFacPage(url, date, ville, i + 1, jpoData.length);
     if (data) allData.push({ url, ...data });
   }
 
   try {
-    fs.writeFileSync("Data/data_FAC.json", JSON.stringify(allData, null, 2), "utf-8");
-    console.log("📂 Données sauvegardées dans fac_data.json !");
+    fs.writeFileSync("Data/data_JPO.json", JSON.stringify(allData, null, 2), "utf-8");
+    console.log("📂 Données sauvegardées dans data_JPO.json !");
   } catch (writeError) {
     console.error("❌ Erreur lors de l'écriture du fichier JSON:", writeError.message);
   }
