@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <tr>
                                     <td>${formation.formationNom}</td>
                                     <td>${formation.duree}</td>
-                                    <td>${formation.modalite}</td>
+                                    <td>${formation.modalite ? formation.modalite : 'Aucune modalité requise ou modalité inconnue'}</td>
                                 </tr>
                             `).join('')}
                         </tbody>
