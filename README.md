@@ -10,10 +10,10 @@ Le scrapping est réalisé à l'aide de Puppeteer, une bibliothèque Node.js qui
 
 ### Fichiers de scrapping
 
-- **JPO_Scrapping.js** : Contient les fonctions pour récupérer le nombre total de pages et scraper les données des JPO.
-- **AjoutDB.js** : (À compléter) Script pour ajouter les données scrapées à une base de données.
-- **ExtractNom.js** : (À compléter) Script pour extraire les noms des établissements.
-- **FacPage_Scrap.js** : (À compléter) Script pour scraper les pages spécifiques des établissements.
+- **JPO_Scrapping.js** : Récupère les informations de base sur une JPO. Ces données sont ensuite utilisées par `FacPage_Scrap.js`.
+- **FacPage_Scrap.js** : Récupère toutes les informations d'un établissement à partir de l'URL obtenue via `JPO_Scrapping.js`.
+- **ExtractNom.js** : Extrait le nom de l'établissement depuis son URL.
+- **AjoutDB.js** : Ajoute les données récupérées dans une base de données SQL à partir d'un fichier JSON.
 
 ## Interface Utilisateur
 
