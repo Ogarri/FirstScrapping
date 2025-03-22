@@ -35,7 +35,7 @@ Les données scrapées sont stockées dans un fichier JSON (`data_JPO.json`). Ce
 - Téléphone
 - Site web
 - Email
-- Formations
+- Formations (formationNom, formationHref, duree, modalite)
 - Dates des JPO
 - Ville
 - Nom
