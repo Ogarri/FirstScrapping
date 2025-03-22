@@ -8,8 +8,16 @@ ajouter des filtes :
 - par code postal
 - par formation
 
-idées visibilité :
+idées HTML / JS :
 - tous les noms dans le tableau doivent commencer par une majucule
+- mettre les formations tout en bas des autres infos
+- rajouter un href tel et un mailto pour les mails
+- le bouton retour doit fermer l'onglet
 - cliquer sur la pagination nous fait scroll en haut de la page
 - voir pour faire un footer avec les autres
 - préparer un readme
+
+idées CSS :
+- centrer les noms (a voir si ça rend bien)
+- agrandit le nom
+- donner un petit coup de polish sur la page détails

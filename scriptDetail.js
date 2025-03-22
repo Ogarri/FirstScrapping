@@ -12,33 +12,36 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p><strong>Nom:</strong> ${item.nom}</p>
                     <p><strong>Ville:</strong> ${item.ville}</p>
                     <p><strong>Code Postal:</strong> ${item.codePostal}</p>
-                    <p><strong>Formations:</strong></p>
-                    <table id="tableauDetail">
-                        <thead>
-                            <tr>
-                                <th>Nom</th>
-                                <th>Durée</th>
-                                <th>Modalité</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${item.formations.map(formation => `
-                                <tr>
-                                    <td>${formation.formationNom}</td>
-                                    <td>${formation.duree}</td>
-                                    <td>${formation.modalite ? formation.modalite : 'Aucune modalité requise ou modalité inconnue'}</td>
-                                </tr>
-                            `).join('')}
-                        </tbody>
-                    </table>
-                    <p><strong>Dates JPO:</strong></p>
-                    <ul>
-                        ${item.dateJPO.map(date => `<li>${date.replace(/-/g, '/')}</li>`).join('')}
-                    </ul>
-                    </br>
-                    <p><strong>Téléphone:</strong> ${item.telephone}</p>
-                    <p><strong>Email:</strong> ${item.email}</p>
+                    <p>
+                        <strong>Dates JPO:</strong>
+                        <ul>
+                            ${item.dateJPO.map(date => `<li>${date.replace(/-/g, '/')}</li>`).join('')}
+                        </ul>
+                    </p>
+                    <p><strong>Téléphone:</strong> <a href="tel:${item.telephone}">${item.telephone}</a></p>
+                    <p><strong>Email:</strong> <a href="mailto:${item.email}">${item.email}</a></p>
                     <p><strong>Site Web:</strong> <a href="${item.siteWeb}" target="_blank">${item.siteWeb}</a></p>
+                    <p>
+                        <strong>Formations:</strong>
+                        <table id="tableauDetail">
+                            <thead>
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Durée</th>
+                                    <th>Modalité</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${item.formations.map(formation => `
+                                    <tr>
+                                        <td>${formation.formationNom}</td>
+                                        <td>${formation.duree}</td>
+                                        <td>${formation.modalite ? formation.modalite : 'Aucune modalité requise ou modalité inconnue'}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </p>
                 `;
             }
         })
