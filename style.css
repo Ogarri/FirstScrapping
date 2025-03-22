@@ -16,7 +16,25 @@ h1 {
     font-size: 42px;
     margin-bottom: 20px;
     color: #c0d1d8;
+    font-family: 'Roboto Slab', serif;
+    font-weight: bold;
+    letter-spacing: 3px;
+    word-spacing: 8px;
+    background: linear-gradient(45deg, #ffffff00, #006eff11, #ffffff00);
 }
+
+h1.clicked {
+    animation: colorChange 10s 1 alternate;
+}
+
+@keyframes colorChange {
+    0% { color: #dce5eb; ; letter-spacing: 3px; transform: translateY(0) rotate(0deg);}
+    25% { color: #0c1230; }
+    50% { color: #1f53ff; letter-spacing: -21px; transform: translateY(525px) rotate(1800deg); text-shadow: 0 0 5px #fff, 0 0 100px #448a9d, 0 0 150px #29219f;}
+    75% { color: #201f29;}
+    100% { color: #dce5eb; letter-spacing: 3px; transform: translateY(0) rotate(3600deg);}
+  }
+
 
 input[type="text"], input[type="date"], select {
     cursor: text;
@@ -136,7 +154,21 @@ a:hover {
 
 p {
     padding-bottom: 10px;
+    font-size: 20px;
 }
+
+#item-details ul li {
+    font-size: 25px;
+    letter-spacing: 1px;
+    color: #94b1be;
+    font-weight: bold;
+}
+
+#item-details {
+    background: linear-gradient(90deg, #07060a, #000000, #07060a);;
+}
+
+
 #pagination-container {
     text-align: center;
 

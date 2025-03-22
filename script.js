@@ -163,4 +163,8 @@ document.addEventListener('DOMContentLoaded', () => {
             renderTable(filteredData, 1);
         })
         .catch(error => console.error('Error fetching data:', error));
+
+    document.querySelector('.titre-cliquable').addEventListener('click', function() {
+        this.classList.toggle('clicked');
+    });
 });
